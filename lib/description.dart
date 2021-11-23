@@ -55,7 +55,6 @@ class Description extends StatelessWidget {
                 ],
               ),
             ),
-            //SizedBox(height: 20),
             Container(
               padding: EdgeInsets.only(top:20),
               child: Center(

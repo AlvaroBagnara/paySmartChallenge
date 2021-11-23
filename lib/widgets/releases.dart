@@ -45,12 +45,15 @@ class ReleasesMovies extends StatelessWidget {
                     );
                   },
                   child: Container(
-                    width: 140,
+                    padding: EdgeInsets.only(left: 0,right: 0,top: 10),
                     child: Column(
                       children: [
                         Container(
-                          height: 340,
+                          height: 360,
+                          margin: EdgeInsets.only(left: 50,right: 50),
                           decoration: BoxDecoration(
+                            border: Border.all(width: 3),
+                            borderRadius: BorderRadius.circular(15),
                             image: DecorationImage(
                               image: NetworkImage(
                                 releases[index].fullImageUrl.toString()
@@ -60,11 +63,15 @@ class ReleasesMovies extends StatelessWidget {
                         ),
                         Container(
                           width: 340,
-                          child: Text(
-                            releases[index].title.toString(),
-                            textAlign: TextAlign.center,
-                            style: GoogleFonts.lexendDeca(fontSize: 20),
+                          child: Center(
+                            child: Text(
+                              releases[index].title.toString(),
+                              textAlign: TextAlign.center,
+                              
+                              style: GoogleFonts.lexendDeca(fontSize: 20),
+                            ),
                           ),
+                          margin: EdgeInsets.only(bottom: 10,top: 10),
                         )
                       ],
                     ),
