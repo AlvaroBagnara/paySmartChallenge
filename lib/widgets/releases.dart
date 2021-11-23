@@ -8,8 +8,9 @@ class ReleasesMovies extends StatelessWidget {
 
   
   final List releases;
-  
-  const ReleasesMovies({Key? key, required this.releases}) : super(key: key);
+  final ScrollController controller;
+
+  const ReleasesMovies({Key? key, required this.releases,required this.controller}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -24,6 +25,7 @@ class ReleasesMovies extends StatelessWidget {
           Container(
             height: height,
             child: ListView.builder(
+              controller: controller,
               scrollDirection: Axis.vertical,
               itemCount: releases.length,
               itemBuilder: (context, index) {
@@ -47,9 +49,8 @@ class ReleasesMovies extends StatelessWidget {
                     child: Column(
                       children: [
                         Container(
-                          height: 200,
+                          height: 340,
                           decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(15),
                             image: DecorationImage(
                               image: NetworkImage(
                                 releases[index].fullImageUrl.toString()
@@ -58,11 +59,11 @@ class ReleasesMovies extends StatelessWidget {
                           ),
                         ),
                         Container(
-                          width: 140,
+                          width: 340,
                           child: Text(
                             releases[index].title.toString(),
                             textAlign: TextAlign.center,
-                            style: GoogleFonts.lexendDeca(),
+                            style: GoogleFonts.lexendDeca(fontSize: 20),
                           ),
                         )
                       ],

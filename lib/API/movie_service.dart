@@ -2,36 +2,42 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 
+int page = 1;
+List<Movie> movies = [];
+
 class MovieService{
   final String apiKey = "";
   final Dio _dio = Dio();
+  
 
   Future<List<Movie>> getMovies() async {
     final response = await _dio.get(
-      "https://api.themoviedb.org/3/movie/upcoming?api_key=${apiKey}&language=en-US&page=1"
+      "https://api.themoviedb.org/3/movie/upcoming?api_key=${apiKey}&language=en-US&page=${page}"
     );
-    final results = List<Map<String, dynamic>>.from(response.data['results']); // OK
-    List<Movie> movies = results.map((movieData) => Movie.fromMap(movieData)).toList(growable:false);
-    //Lista nao cresce com o growable.
-    
+    final results = List<Map<String, dynamic>>.from(response.data['results']); 
+    List<Movie> movie = results.map((movieData) => Movie.fromMap(movieData)).toList();
+    movies.addAll(movie);
     return movies;
+  }
+  AddPage(){
+    page++;
   }
 }
 
 class Movie {
   String title;
-  String posterPath;
+  String ?posterPath;
   String genre;
   String overview;
   String releaseDate;
-  String backdropPath;
+  String ?backdropPath;
   Movie({
     required this.title,
-    required this.posterPath,
+    this.posterPath,
     required this.genre,
     required this.overview,
     required this.releaseDate,
-    required this.backdropPath,
+    this.backdropPath,
   });
 
   String get fullImageUrl => 'https://image.tmdb.org/t/p/w200$posterPath';

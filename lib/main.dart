@@ -5,7 +5,7 @@ import 'package:pay_smart/API/movie_service.dart';
 
 import 'widgets/releases.dart';
 
-void main()=>runApp(new MyApp());
+void main() => runApp(new MyApp());
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -31,22 +31,36 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  Icon customIcon = const Icon(Icons.search);
+  Widget customSearchBar = const Text('My Personal Journal');
 
-  List releasesMovies = [];  
+  List releasesMovies = [];
+  final _controller = ScrollController();
+
+  void infiniteScroll() {
+    if (_controller.position.atEdge) {
+      final isTop = _controller.position.pixels == 0;
+
+      if (isTop) {
+      } else {
+        MovieService().AddPage();
+        loadReleasesMovies();
+      }
+    }
+  }
 
   @override
   void initState() {
+    _controller.addListener(infiniteScroll);
     loadReleasesMovies();
     super.initState();
   }
 
-  loadReleasesMovies() async{
+  loadReleasesMovies() async {
     final movies = await MovieService().getMovies();
-    //print(a.map((movie) => movie.title));
     setState(() {
       releasesMovies = movies;
     });
-    //print(releasesMovies);
     return movies;
   }
 
@@ -54,16 +68,22 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Pay Smart Challenge"),       
+        title: Text("Pay Smart Challenge"),
+        automaticallyImplyLeading: false,
+        actions: [
+          IconButton(
+              onPressed: () {
+                setState(() {});
+              },
+              icon: const Icon(Icons.search))
+        ],
       ),
-      body: ListView(
-        children:[
-          ReleasesMovies(releases: releasesMovies)
-        ]
-      ),
+      body: ListView(children: [
+        ReleasesMovies(
+          releases: releasesMovies,
+          controller: _controller,
+        )
+      ]),
     );
   }
-
-  
 }
-

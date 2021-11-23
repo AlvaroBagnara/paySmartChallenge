@@ -72,13 +72,11 @@ class Description extends StatelessWidget {
                 style: GoogleFonts.lexendDeca()
               ),
             ),
-
           ],
         ),
       ),
     );
   } 
-
 }
 
 GenderID(String genre){
@@ -106,7 +104,6 @@ GenderID(String genre){
       else if(data[i] == "53"){genreList.add("Thriller");}
       else if(data[i] == "10752"){genreList.add("War");}
       else if(data[i] == "37"){genreList.add("Western");} 
-    }
-    
+    }    
     return genreList;
 }
