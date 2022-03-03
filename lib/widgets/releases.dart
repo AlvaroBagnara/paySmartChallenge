@@ -50,6 +50,7 @@ class ReleasesMovies extends StatelessWidget {
                       children: [
                         Container(
                           height: 360,
+                          width: 260,
                           margin: EdgeInsets.only(left: 50,right: 50),
                           decoration: BoxDecoration(
                             border: Border.all(width: 3),

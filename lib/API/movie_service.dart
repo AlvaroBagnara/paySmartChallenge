@@ -6,7 +6,7 @@ int page = 1;
 List<Movie> movies = [];
 
 class MovieService{
-  final String apiKey = "";
+  final String apiKey = "5b24679c2f734a10a09f391a013e3fd8";
   final Dio _dio = Dio();
   
 
